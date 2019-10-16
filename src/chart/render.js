@@ -127,7 +127,7 @@ function render(config) {
     .style('font-weight', 500)
     .style('cursor', 'pointer')
     .style('fill', reportsColor)
-    .text(helpers.getTextForTitle)
+    .text(helpers.getTextForTitle);
 
   // Person's Avatar
   nodeEnter
@@ -159,7 +159,8 @@ function render(config) {
   const nodeLink = nodeEnter
     .append('a')
     .attr('class', PERSON_LINK_CLASS)
-    .attr('xlink:href', d => d.person.link || 'https://lattice.com')
+    .attr('style', d => d.person.link ? '' : 'display:none')
+    .attr('xlink:href', d => d.person.link || undefined)
     .on('click', datum => {
       d3.event.stopPropagation()
       // TODO: fire link click handler
