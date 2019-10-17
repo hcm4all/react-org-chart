@@ -93,7 +93,7 @@ function render(config) {
   // Person's Name
   nodeEnter
     .append('text')
-    .attr('class', PERSON_NAME_CLASS)
+    .attr('class', PERSON_NAME_CLASS + ' unedited')
     .attr('x', namePos.x)
     .attr('y', namePos.y)
     .attr('dy', '.3em')
@@ -201,6 +201,7 @@ function render(config) {
   const wrapWidth = 140
 
   svg.selectAll('text.unedited.' + PERSON_TITLE_CLASS).call(wrapText, wrapWidth)
+  svg.selectAll('text.unedited.' + PERSON_NAME_CLASS).call(wrapText, wrapWidth)
 
   // Render lines connecting nodes
   renderLines(config)
