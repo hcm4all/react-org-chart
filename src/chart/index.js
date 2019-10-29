@@ -61,6 +61,10 @@ function init(options) {
     .tree()
     .nodeSize([nodeWidth + nodeSpacing, nodeHeight + nodeSpacing])
 
+  config.tree.separation(function separation(a, b) {
+    return a.parent == b.parent ? 1 : 1.4;
+  });
+
   // Calculate width of a node with expanded children
   const childrenWidth = parseInt(treeData.children.length * nodeWidth / 2)
 
