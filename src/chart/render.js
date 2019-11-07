@@ -102,17 +102,23 @@ function render(config) {
     .style('font-size', 16)
     .text(d => d.person.name)
 
+  // Wrap the title texts
+  const wrapWidth = 140
+  svg.selectAll('text.unedited.' + PERSON_NAME_CLASS).call(wrapText, wrapWidth)
+
   // Person's Title
   nodeEnter
     .append('text')
     .attr('class', PERSON_TITLE_CLASS + ' unedited')
     .attr('x', namePos.x)
-    .attr('y', namePos.y + nodePaddingY * 1.2)
+    .attr('y', function() { return namePos.y + d3.select(this.previousSibling).node().getBoundingClientRect().height })
     .attr('dy', '0.1em')
     .style('font-size', 14)
     .style('cursor', 'pointer')
     .style('fill', titleColor)
     .text(d => d.person.title)
+
+  svg.selectAll('text.unedited.' + PERSON_TITLE_CLASS).call(wrapText, wrapWidth)
 
   const heightForTitle = 45 // getHeightForText(d.person.title)
 
@@ -196,12 +202,6 @@ function render(config) {
 
   // Update the links
   const link = svg.selectAll('path.link').data(links, d => d.target.id)
-
-  // Wrap the title texts
-  const wrapWidth = 140
-
-  svg.selectAll('text.unedited.' + PERSON_TITLE_CLASS).call(wrapText, wrapWidth)
-  svg.selectAll('text.unedited.' + PERSON_NAME_CLASS).call(wrapText, wrapWidth)
 
   // Render lines connecting nodes
   renderLines(config)
