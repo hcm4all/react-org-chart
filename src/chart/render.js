@@ -9,6 +9,8 @@ const PERSON_NAME_CLASS = 'org-chart-person-name'
 const PERSON_TITLE_CLASS = 'org-chart-person-title'
 const PERSON_DEPARTMENT_CLASS = 'org-chart-person-dept'
 const PERSON_REPORTS_CLASS = 'org-chart-person-reports'
+const OPEN_POSITIONS_CLASS = 'org-chart-open-positions'
+const FILLED_POSITIONS_CLASS = 'org-chart-filled-positions'
 
 function render(config) {
   const {
@@ -119,6 +121,38 @@ function render(config) {
     .text(d => d.person.title)
 
   svg.selectAll('text.unedited.' + PERSON_TITLE_CLASS).call(wrapText, wrapWidth)
+
+  // Open positions
+  nodeEnter
+    .append('a')
+    .attr('class', OPEN_POSITIONS_CLASS)
+    .attr('xlink:href', d => d.person.open_positions.url || undefined)
+    .append('text')
+    .attr('x', nodeWidth - 40)
+    .attr('y', nodeHeight - 100)
+    .attr('dy', '.9em')
+    .attr('style', d => d.person.open_positions ? '' : 'display:none')
+    .style('fill', '#a93232')
+    .style('font-size', 14)
+    .style('font-weight', 500)
+    .style('cursor', 'pointer')
+    .text(d => d.person.open_positions.number || undefined)
+
+  // Filled positions
+  nodeEnter
+    .append('a')
+    .attr('class', FILLED_POSITIONS_CLASS)
+    .attr('xlink:href', d => d.person.filled_positions.url || undefined)
+    .append('text')
+    .attr('x', nodeWidth - 30)
+    .attr('y', nodeHeight - 100)
+    .attr('dy', '.9em')
+    .attr('style', d => d.person.filled_positions ? '' : 'display:none')
+    .style('fill', '#3db452')
+    .style('font-size', 14)
+    .style('font-weight', 500)
+    .style('cursor', 'pointer')
+    .text(d => d.person.filled_positions.number || undefined)
 
   const heightForTitle = 45 // getHeightForText(d.person.title)
 
