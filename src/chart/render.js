@@ -256,6 +256,10 @@ function render(config) {
     d.x0 = d.x
     d.y0 = d.y
   })
+
+  $(document).ready(function() {
+    $('text[data-toggle="tooltip"]').tooltip()
+  })
 }
 
 function getDepartmentClass(d) {
