@@ -129,6 +129,7 @@ function render(config) {
     .append('a')
     .attr('class', FILLED_POSITIONS_CLASS)
     .attr('xlink:href', d => d.person.filled_positions.url || undefined)
+    .attr('disabled', d => d.person.filled_positions.url ? null : 'disabled')
     .append('text')
     .attr('x', namePos.x)
     .attr('y', namePos.y + nodePaddingY + heightForPositions)
@@ -147,6 +148,7 @@ function render(config) {
     .append('a')
     .attr('class', OPEN_POSITIONS_CLASS)
     .attr('xlink:href', d => d.person.open_positions.url || undefined)
+    .attr('disabled', d => d.person.open_positions.url ? null : 'disabled')
     .append('text')
     .attr('x', function (d) {
       let filled_positions = $(this).parent().prev().children()[0]
