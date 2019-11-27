@@ -122,21 +122,7 @@ function render(config) {
 
   svg.selectAll('text.unedited.' + PERSON_TITLE_CLASS).call(wrapText, wrapWidth)
 
-  // Open positions
-  nodeEnter
-    .append('a')
-    .attr('class', OPEN_POSITIONS_CLASS)
-    .attr('xlink:href', d => d.person.open_positions.url || undefined)
-    .append('text')
-    .attr('x', nodeWidth - 40)
-    .attr('y', nodeHeight - 100)
-    .attr('dy', '.9em')
-    .attr('style', d => d.person.open_positions ? '' : 'display:none')
-    .style('fill', '#a93232')
-    .style('font-size', 14)
-    .style('font-weight', 500)
-    .style('cursor', 'pointer')
-    .text(d => d.person.open_positions.number || undefined)
+  const heightForPositions = 25
 
   // Filled positions
   nodeEnter
@@ -144,8 +130,8 @@ function render(config) {
     .attr('class', FILLED_POSITIONS_CLASS)
     .attr('xlink:href', d => d.person.filled_positions.url || undefined)
     .append('text')
-    .attr('x', nodeWidth - 30)
-    .attr('y', nodeHeight - 100)
+    .attr('x', namePos.x)
+    .attr('y', namePos.y + nodePaddingY + heightForPositions)
     .attr('dy', '.9em')
     .attr('style', d => d.person.filled_positions ? '' : 'display:none')
     .style('fill', '#3db452')
@@ -153,6 +139,27 @@ function render(config) {
     .style('font-weight', 500)
     .style('cursor', 'pointer')
     .text(d => d.person.filled_positions.number || undefined)
+
+  // Open positions
+  nodeEnter
+    .append('a')
+    .attr('class', OPEN_POSITIONS_CLASS)
+    .attr('xlink:href', d => d.person.open_positions.url || undefined)
+    .append('text')
+    .attr('x', function (d) {
+      let filled_positions = $(this).parent().prev().children()[0]
+      let filled_positions_x = parseInt(filled_positions.getAttribute('x'))
+      let filled_positions_width = filled_positions.getComputedTextLength()
+      return filled_positions_x + filled_positions_width + 5;
+    })
+    .attr('y', namePos.y + nodePaddingY + heightForPositions)
+    .attr('dy', '.9em')
+    .attr('style', d => d.person.open_positions ? '' : 'display:none')
+    .style('fill', '#a93232')
+    .style('font-size', 14)
+    .style('font-weight', 500)
+    .style('cursor', 'pointer')
+    .text(d => d.person.open_positions.number || undefined)
 
   const heightForTitle = 45 // getHeightForText(d.person.title)
 
