@@ -118,7 +118,9 @@ function render(config) {
     .style('font-size', 14)
     .style('cursor', 'pointer')
     .style('fill', titleColor)
-    .text(d => d.person.title)
+    .attr('data-toggle', d => d.person.title ? 'tooltip' : '')
+    .attr('data-original-title', d => d.person.title || undefined)
+    .text(d => d.person.title ? (d.person.title.substring(0, 40) + '...') : '')
 
   svg.selectAll('text.unedited.' + PERSON_TITLE_CLASS).call(wrapText, wrapWidth)
 
