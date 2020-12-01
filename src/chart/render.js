@@ -102,10 +102,11 @@ function render(config) {
     .style('cursor', 'pointer')
     .style('fill', nameColor)
     .style('font-size', 16)
+    .attr('data-original-title', d => d.person.name || undefined)
     .text(d => d.person.name)
 
   // Wrap the title texts
-  const wrapWidth = 140
+  const wrapWidth = 135
   svg.selectAll('text.unedited.' + PERSON_NAME_CLASS).call(wrapText, wrapWidth)
 
   // Person's Title
@@ -118,15 +119,8 @@ function render(config) {
     .style('font-size', 14)
     .style('cursor', 'pointer')
     .style('fill', titleColor)
-    .attr('data-toggle', d => (d.person.title && d.person.title.length >= 40) ? 'tooltip' : '')
     .attr('data-original-title', d => d.person.title || undefined)
-    .text(function(d) {
-      if ((d.person.title && d.person.title.length >= 40)) {
-        return (d.person.title.substring(0, 40) + '...')
-      } else {
-        return d.person.title
-      }
-    })
+    .text(d => d.person.title)
 
   svg.selectAll('text.unedited.' + PERSON_TITLE_CLASS).call(wrapText, wrapWidth)
 

@@ -35,7 +35,14 @@ module.exports = function wrapText(text, width) {
 
       if (tspan.node().getComputedTextLength() > width) {
         line.pop()
+
+        if (lineNumber == 1) {
+          line.push(' ...')
+          tspan.node().parentElement.setAttribute('data-toggle', 'tooltip')
+        }
+
         tspan.text(line.join(' '))
+
         line = [word]
         tspan = text
           .append('tspan')
@@ -43,6 +50,10 @@ module.exports = function wrapText(text, width) {
           .attr('y', y)
           .attr('dy', ++lineNumber * lineHeight + dy + 'em')
           .text(word)
+      }
+
+      if (lineNumber > 1) {
+        tspan.attr('visibility', 'hidden')
       }
     }
 
