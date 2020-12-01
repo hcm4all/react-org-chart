@@ -118,9 +118,15 @@ function render(config) {
     .style('font-size', 14)
     .style('cursor', 'pointer')
     .style('fill', titleColor)
-    .attr('data-toggle', d => d.person.title ? 'tooltip' : '')
+    .attr('data-toggle', d => (d.person.title && d.person.title.length >= 40) ? 'tooltip' : '')
     .attr('data-original-title', d => d.person.title || undefined)
-    .text(d => d.person.title ? (d.person.title.substring(0, 40) + '...') : '')
+    .text(function(d) {
+      if ((d.person.title && d.person.title.length >= 40)) {
+        return (d.person.title.substring(0, 40) + '...')
+      } else {
+        return d.person.title
+      }
+    })
 
   svg.selectAll('text.unedited.' + PERSON_TITLE_CLASS).call(wrapText, wrapWidth)
 
