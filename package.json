@@ -1,8 +1,8 @@
 {
-  "name": "@annettepancake/react-org-chart",
+  "name": "@hcm4all/react-org-chart",
   "version": "0.1.11",
   "description": "Simple, high-performance react component for d3 org chart",
-  "repository": "https://github.com/AnnettePancake/react-org-chart.git",
+  "repository": "https://github.com/hcm4all/react-org-chart.git",
   "main": "dist/index.js",
   "directories": {
     "example": "src/examples"
