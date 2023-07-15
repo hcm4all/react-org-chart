@@ -1,6 +1,6 @@
 {
   "name": "@hcm4all/react-org-chart",
-  "version": "0.1.11",
+  "version": "0.1.12",
   "description": "Simple, high-performance react component for d3 org chart",
   "repository": "https://github.com/hcm4all/react-org-chart.git",
   "main": "dist/index.js",
