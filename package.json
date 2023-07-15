@@ -4,6 +4,9 @@
   "description": "Simple, high-performance react component for d3 org chart",
   "repository": "https://github.com/hcm4all/react-org-chart.git",
   "main": "dist/index.js",
+  "publishConfig": {
+    "access": "public"
+  },
   "directories": {
     "example": "src/examples"
   },
